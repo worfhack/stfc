@@ -7,10 +7,6 @@ import { BlogApiResponse } from "@/app/blog/types";
 import type { Metadata } from "next";
 
 const PER_PAGE_DEFAULT = 6;
-
-// Optionnel, mais explicite : on force le statique
-export const dynamic = "force-static";
-
 async function fetchBlogData(
     baseUrl: string,
     page: number,
@@ -27,12 +23,12 @@ async function fetchBlogData(
     }
 
     const res = await fetch(url.toString(), {
-      // IMPORTANT : pas de "no-store" si tu veux du SSG / export statique
-      cache: "force-cache",
+      cache: "no-store",
     });
 
     if (!res.ok) throw new Error("Erreur API blog");
     const data = (await res.json()) as BlogApiResponse;
+    console.log(JSON.stringify(data))
     return data;
   } catch (e) {
     console.error(e);
@@ -44,11 +40,8 @@ type BlogSearchParams = {
   page?: string;
   category?: string;
 };
-
-// ❌ Avant : searchParams?: Promise<BlogSearchParams>;
-// ✅ Maintenant : simple objet
 type BlogPageProps = {
-  searchParams?: BlogSearchParams;
+  searchParams?: Promise<BlogSearchParams>;
 };
 
 const buildPageHref = (page: number, categorySlug?: string) => {
@@ -58,6 +51,7 @@ const buildPageHref = (page: number, categorySlug?: string) => {
     query.set("category", categorySlug);
   }
 
+  // page 1 : pas de param "page" pour avoir une URL propre
   if (page > 1) {
     query.set("page", String(page));
   }
@@ -66,14 +60,14 @@ const buildPageHref = (page: number, categorySlug?: string) => {
   return qs ? `/blog?${qs}` : "/blog";
 };
 
+
 export async function generateMetadata(
     { searchParams }: BlogPageProps
 ): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_WP_API!;
-  // ❌ Avant : const sp = (await searchParams) ?? {};
-  const sp = searchParams ?? {};
+  const sp = (await searchParams) ?? {}; // 👈 on attend le Promise
 
-  const page = Number(sp.page ?? 1) || 1;
+  const page = Number(sp.page ?? 1);
   const categorySlug = sp.category ?? null;
 
   const data = await fetchBlogData(baseUrl, page, categorySlug);
@@ -108,6 +102,7 @@ export async function generateMetadata(
   };
 }
 
+
 // ---- Page principale ----
 
 const BlogPage = async ({ searchParams }: BlogPageProps) => {
@@ -125,17 +120,20 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
     );
   }
 
-  // ❌ Avant : const sp = (await searchParams) ?? {};
-  const sp = searchParams ?? {};
-  const page = Math.max(1, Number(sp.page ?? 1) || 1);
+  // 👇 ICI : on attend le Promise
+  const sp = (await searchParams) ?? {};
+  const page = Math.max(1, Number(sp.page ?? 1));
   const categorySlug = sp.category ?? "";
+
   const data = await fetchBlogData(baseUrl, page, categorySlug || null);
+
   const posts = data?.posts ?? [];
   const pagination = data?.pagination;
   const hero = data?.page?.hero;
 
   const apiCategories = data?.categories ?? [];
 
+// On ajoute "Tous" en tête, puis les catégories WP
   const categories = [
     { name: "Tous", slug: "" },
     ...apiCategories.map((cat) => ({
@@ -150,13 +148,16 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
 
   return (
       <div className="min-h-screen bg-gray-900 text-white">
+
         <main className="pt-20">
           {/* Hero Section */}
           <section className="relative py-20 overflow-hidden">
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                  backgroundImage: `url('${hero?.background || ""}')`,
+                  backgroundImage: `url('${
+                      hero?.background || ""
+                  }')`,
                 }}
             >
               <div className="absolute inset-0 bg-gray-900/80"></div>
@@ -170,19 +171,18 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
                 {hero?.title || ""}
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                {hero?.subtitle || ""}
+                {hero?.subtitle ||
+                    ""}
               </p>
             </div>
           </section>
 
-          {/* Categories Filter */}
+          {/* Categories Filter (via query string, pas de useState) */}
           <section className="py-8 bg-gray-800/50">
             <div className="max-w-7xl mx-auto px-6">
               <div className="flex flex-wrap justify-center gap-4">
                 {categories.map((cat) => {
-                  const isActive =
-                      cat.slug === categorySlug ||
-                      (!categorySlug && cat.slug === "");
+                  const isActive = cat.slug === categorySlug || (!categorySlug && cat.slug === "");
                   const href =
                       cat.slug === ""
                           ? "/blog"
@@ -258,12 +258,11 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
               {/* Pagination */}
               {pagination && pagination.total_pages > 1 && (
                   <div className="mt-12 flex items-center justify-center gap-4">
+                    {/* Previous */}
                     {pagination.current_page > 1 && (
                         <Link
-                            href={buildPageHref(
-                                pagination.current_page - 1,
-                                categorySlug || undefined
-                            )}
+                            href={buildPageHref(pagination.current_page - 1, categorySlug || undefined)}
+
                             className="px-4 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 cursor-pointer"
                         >
                           ← Page précédente
@@ -277,12 +276,11 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
                       )}
                 </span>
 
+                    {/* Next */}
                     {pagination.current_page < pagination.total_pages && (
                         <Link
-                            href={buildPageHref(
-                                pagination.current_page + 1,
-                                categorySlug || undefined
-                            )}
+                            href={buildPageHref(pagination.current_page + 1, categorySlug || undefined)}
+
                             className="px-4 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700 cursor-pointer"
                         >
                           Page suivante →
@@ -293,7 +291,7 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
             </div>
           </section>
 
-          {/* Newsletter Section */}
+          {/* Newsletter Section (inchangé) */}
           <section className="py-16 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
             <div className="max-w-4xl mx-auto px-6 text-center">
               <h2
@@ -320,6 +318,7 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
             </div>
           </section>
         </main>
+
       </div>
   );
 };

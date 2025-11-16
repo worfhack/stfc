@@ -70,7 +70,7 @@ async function fetchBlogPost(
 
     const res = await fetch(
         `${wp}/starfleet/v1/blog-post?slug=${encodeURIComponent(slug)}`,
-        // {cache: "no-store"}
+        {cache: "no-store"}
     );
 
     if (!res.ok) {
