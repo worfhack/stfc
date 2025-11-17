@@ -36,28 +36,28 @@ type BlogListApiResponse = {
     posts: { slug: string }[];
 };
 
-export async function generateStaticParams() {
-    const wp = process.env.NEXT_PUBLIC_WP_API;
-    if (!wp) {
-        console.error("NEXT_PUBLIC_WP_API non défini");
-        return [];
-    }
-
-    const res = await fetch(`${wp}/starfleet/v1/blog`, {
-        cache: "force-cache",
-    });
-
-    if (!res.ok) {
-        console.error("Erreur API blog listing pour generateStaticParams", res.status);
-        return [];
-    }
-
-    const data = (await res.json()) as BlogListApiResponse;
-
-    return data.posts.map((post) => ({
-        slug: post.slug,
-    }));
-}
+// export async function generateStaticParams() {
+//     const wp = process.env.NEXT_PUBLIC_WP_API;
+//     if (!wp) {
+//         console.error("NEXT_PUBLIC_WP_API non défini");
+//         return [];
+//     }
+//
+//     const res = await fetch(`${wp}/starfleet/v1/blog`, {
+//         cache: "force-cache",
+//     });
+//
+//     if (!res.ok) {
+//         console.error("Erreur API blog listing pour generateStaticParams", res.status);
+//         return [];
+//     }
+//
+//     const data = (await res.json()) as BlogListApiResponse;
+//
+//     return data.posts.map((post) => ({
+//         slug: post.slug,
+//     }));
+// }
 
 async function fetchBlogPost(
     slug: string
