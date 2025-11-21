@@ -29,8 +29,8 @@ const ActivitiesSection = () => {
   ];
 
   return (
-    <section id="activites" className="py-20 bg-gray-800">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="activites" className="bg-gray-800">
+      <div className="py-20  max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Orbitron, sans-serif' }}>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">

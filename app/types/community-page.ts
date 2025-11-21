@@ -1,3 +1,5 @@
+import {ApiSeo} from "@/app/types/seo";
+
 export type ApiCommunityIntroParagraph = {
     text?: string;
 };
@@ -25,6 +27,7 @@ export type ApiCommunityMapBlock = {
 };
 
 export type ApiCommunityResponse = {
+    seo: ApiSeo | undefined;
     id: number;
     title: string;
     slug: string;

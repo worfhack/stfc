@@ -1,5 +1,7 @@
 // app/types/blog.ts
 
+import {ApiSeo} from "@/app/types/seo";
+
 export interface BlogPost {
     id: number;
     title: string;
@@ -38,6 +40,7 @@ export interface BlogPage {
 }
 
 export interface BlogApiResponse {
+    seo: ApiSeo;
     page: BlogPage;
     posts: BlogPost[];
     categories?: BlogCategory[];

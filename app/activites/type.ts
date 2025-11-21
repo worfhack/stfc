@@ -33,9 +33,9 @@ export type ApiAdditionalActivity = {
 };
 
 export type ApiSeo = {
-    title?: string;
-    description?: string;
-    og_image?: ApiImage | null;
+    seo_title?: string;
+    seo_description?: string;
+    seo_image?: ApiImage | null;
 };
 
 export type ApiHero = {
@@ -100,9 +100,9 @@ export type AdditionalActivity = {
 };
 
 export type Seo = {
-    title: string;
-    description: string;
-    ogImageUrl: string;
+    seo_title: string;
+    seo_description: string;
+    seo_image: string;
 };
 
 export type Hero = {

@@ -1,7 +1,9 @@
 // app/events/EventsGrid.tsx
 
 import {ApiEvent} from "./types";
-
+import {
+    RiCalendarLine, RiMapPinLine, RiCalendarCheckLine
+} from "react-icons/ri";
 export default function EventsGrid({events}: { events: ApiEvent[] }) {
     if (events.length === 0) {
         return (
@@ -68,7 +70,7 @@ export default function EventsGrid({events}: { events: ApiEvent[] }) {
                             <div className="space-y-2 mb-4">
                                 {event.event_date && (
                                     <div className="flex items-center text-gray-400">
-                                        <i className="ri-calendar-line mr-3 text-purple-400"/>
+                                        <RiCalendarLine className="mr-3 text-purple-400" />
                                         <span>
                       {formatDate(event.event_date)}
                                             {event.event_time && ` à ${event.event_time}`}
@@ -78,7 +80,7 @@ export default function EventsGrid({events}: { events: ApiEvent[] }) {
 
                                 {event.location && (
                                     <div className="flex items-center text-gray-400">
-                                        <i className="ri-map-pin-line mr-3 text-purple-400"/>
+                                        <RiMapPinLine className="mr-3 text-purple-400" />
                                         <span>{event.location}</span>
                                     </div>
                                 )}
@@ -92,7 +94,7 @@ export default function EventsGrid({events}: { events: ApiEvent[] }) {
 
                             <button
                                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold">
-                                <i className="ri-calendar-check-line mr-2"/>
+                                <RiCalendarCheckLine className="mr-3 text-purple-400" />
                                 S'inscrire
                             </button>
                         </div>

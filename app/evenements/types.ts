@@ -1,6 +1,8 @@
 // app/events/types.ts
 
 // ---- IMAGES ----
+import {ApiSeo} from "@/app/types/seo";
+
 export type ApiImage = {
     id?: number;
     url?: string;
@@ -47,13 +49,14 @@ export type ApiEvent = {
     event_date?: string; // YYYY-MM-DD
     event_time?: string;
     location?: string;
-    image?: ApiImage | null;
+    image?: string | null;
     categories?: ApiEventCategory[];
     permalink?: string;
 };
 
 // ---- PAYLOAD COMPLET FOURNI PAR L’API ----
 export type ApiEventsOverview = {
+    seo: ApiSeo | undefined;
     page?: ApiPage | null;
     events?: ApiEvent[];
     categories?: ApiCategory[];
@@ -63,7 +66,6 @@ export type ApiEventsOverview = {
 export type UiCategory = {
     id: string; // exemple: "all" ou slug
     name: string;
-    icon: string; // remixicon class
 };
 export interface BlogCategory {
     id: number;

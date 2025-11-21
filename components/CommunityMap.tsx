@@ -24,14 +24,13 @@ type Props = {
 
 const defaultCenter: [number, number] = [46.5, 2.5];
 
-const CommunityMap = ({ markers }: Props) => {
-    const validMarkers = markers.filter(
-        (m) => m.location.lat !== null && m.location.lng !== null
+    const CommunityMap = ({ markers }: Props) => {
+        const validMarkers = markers.filter(
+            (m) => m?.location?.lat !== null && m?.location?.lng !== null
     );
-
     const center: [number, number] =
         validMarkers.length > 0
-            ? [validMarkers[0].location.lat as number, validMarkers[0].location.lng as number]
+            ? [validMarkers[0].location?.lat as number, validMarkers[0].location?.lng as number]
             : defaultCenter;
 
     return (
@@ -49,7 +48,7 @@ const CommunityMap = ({ markers }: Props) => {
             {validMarkers.map((m) => (
                 <Marker
                     key={m.id}
-                    position={[m.location.lat as number, m.location.lng as number]}
+                    position={[m.location?.lat as number, m.location?.lng as number]}
                     icon={markerIcon}
                 >
                         {/*<Popup>*/}

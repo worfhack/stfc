@@ -17,10 +17,7 @@ export default function RootLayout({
     return (
         <html lang="fr">
         <head>
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css"
-            />
+
         </head>
         <body className="bg-gray-900 text-white min-h-screen">
         <Header/>

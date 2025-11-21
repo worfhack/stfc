@@ -6,57 +6,32 @@ import {cache} from "react";
 
 import {ApiCommunityResponse} from "@/app/types/community-page";
 import {Metadata} from "next";
+import {buildSeoMetadata} from "@/lib/seo";
+import {getImageUrl} from "@/lib/image";
 
-// export const dynamic = "force-dynamic";
 
-// ---- Fetch côté serveur ----
-
-const getCommunityData = cache(async (): Promise<ApiCommunityResponse | null> => {
+const getCommunityData = cache(async (): Promise<ApiCommunityResponse> => {
     const baseUrl = process.env.NEXT_PUBLIC_WP_API;
 
     if (!baseUrl) {
-        console.error("NEXT_PUBLIC_WP_API non défini");
-        return null;
+        throw new Error("");
     }
-
     try {
         const res = await fetch(`${baseUrl}/starfleet/v1/community`, {
-            // cache: "no-store", // pas de cache HTTP, mais cache() évite le double fetch
         });
-
         if (!res.ok) {
-            throw new Error("Erreur API page communauté");
+            throw new Error("");
         }
-
         const data = (await res.json()) as ApiCommunityResponse;
         return data;
     } catch (e) {
-        console.error(e);
-        return null;
+        throw new Error("");
     }
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-    const communityData = await getCommunityData();
-
-    const titleFromApi =
-        communityData?.hero?.title ||
-        "Communauté Star Trek French Club";
-
-    const descriptionFromApi =
-        communityData?.intro?.paragraphs?.[0]?.text ||
-        "Découvrez la communauté francophone Star Trek : fans, activités locales, rencontres et événements.";
-
-    return {
-        title: titleFromApi,
-        description: descriptionFromApi,
-        openGraph: {
-            title: titleFromApi,
-            description: descriptionFromApi,
-            url: "https://ton-domaine.fr/community",
-            type: "website",
-        },
-    };
+    const data = await getCommunityData();
+    return buildSeoMetadata(data.seo, getImageUrl);
 }
 export default async function CommunityPage() {
 

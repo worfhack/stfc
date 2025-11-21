@@ -1,5 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {Metadata} from "next";
+import {buildSeoMetadata} from "@/lib/seo";
+import {getImageUrl} from "@/lib/image";
+import {cache} from "react";
+import {ApiCommunityResponse} from "@/app/types/community-page";
 
 type ApiMember = {
   name: string;
@@ -28,17 +33,16 @@ type BoardApiResponse = {
   members?: ApiMember[];
 };
 
-async function fetchBoardPage(): Promise<BoardApiResponse> {
+
+const fetchBoardPage = cache(async (): Promise<BoardApiResponse> => {
   const url = `${process.env.NEXT_PUBLIC_WP_API}/starfleet/v1/board`;
   const res = await fetch(url, {});
-
   if (!res.ok) {
-    console.error("Failed to fetch board data", res.status);
-    return {};
+    throw new Error("");
   }
 
   return res.json();
-}
+});
 
 function getRankColor(rank: string) {
   switch (rank) {
@@ -66,6 +70,13 @@ function getRankDescription(rank: string) {
   }
 }
 
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await fetchBoardPage();
+  return buildSeoMetadata(data.seo, getImageUrl);
+}
+
 export default async function BoardPage() {
   const data = await fetchBoardPage();
   const { hero, members } = data;
@@ -80,8 +91,7 @@ export default async function BoardPage() {
       hero?.quote ??
       "« L’équipage est plus que la somme de ses membres : c’est une famille. »";
   const heroQuoteAuthor = hero?.quoteAuthor ?? "— Star Trek French Club";
-  const heroBg =
-      hero?.backgroundImage ?? "/images/association-bg-stars.jpg";
+  const heroBg = hero?.backgroundImage ?? "/images/association-bg-stars.jpg";
 
   return (
       <div className="min-h-screen bg-gray-900 text-white">
@@ -200,7 +210,7 @@ export default async function BoardPage() {
             </div>
           </section>
 
-          {/* ➕ NOUVELLE SECTION 2 : Conventions & grands événements */}
+          {/* SECTION 2 : Conventions & grands événements */}
           <section className="py-16 bg-gradient-to-br from-blue-950/40 via-gray-900 to-purple-950/40 border-y border-gray-800">
             <div className="max-w-6xl mx-auto px-6">
               <div className="text-center mb-10">
@@ -350,10 +360,10 @@ export default async function BoardPage() {
             </div>
           </section>
 
-          {/* SECTION 4 : Le bureau (bloc existant) */}
+          {/* SECTION 4 : Le bureau */}
           <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
-              <div className="text-center mb-16">
+              <div className="text-center mb-10 md:mb-16">
                 <h2
                     className="text-4xl font-bold mb-6"
                     style={{ fontFamily: "Orbitron, sans-serif" }}
@@ -362,10 +372,27 @@ export default async function BoardPage() {
                   Le bureau du Star Trek French Club
                 </span>
                 </h2>
-                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
                   Le bureau est l’équipage de passerelle de l’association : il
-                  coordonne, arbitre et accompagne les projets pour que la vie du
-                  club reste fluide et cohérente.
+                  guide, coordonne et arbitre pour que la vie du club reste fluide,
+                  cohérente et fidèle à l’esprit de la Fédération.
+                </p>
+
+                <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-2">
+                  Ses membres sont{" "}
+                  <span className="font-semibold text-white">
+                  élus en Assemblée générale pour un mandat de 2&nbsp;ans
+                </span>
+                  , et agissent comme des capitaines et officiers de confiance
+                  au service de la communauté.
+                </p>
+
+                <p className="text-base text-gray-400 max-w-3xl mx-auto">
+                  Mais le plus important reste l’ensemble des adhérents&nbsp;: chaque
+                  membre du club est indispensable au rayonnement du Star Trek
+                  French Club, qu’il soit simple curieux, bénévole ponctuel ou
+                  pilier de l’organisation.
                 </p>
               </div>
 
@@ -387,34 +414,16 @@ export default async function BoardPage() {
                               />
                           )}
 
-                          {member.starTrekRank && (
-                              <div
-                                  className={`absolute -top-4 -right-4 bg-gradient-to-r ${getRankColor(
-                                      member.starTrekRank
-                                  )} rounded-full p-4 border-4 border-gray-900 shadow-lg`}
-                              >
-                                <i
-                                    className={`${
-                                        member.rankInsignia ?? "ri-star-fill"
-                                    } text-2xl text-white`}
-                                ></i>
-                              </div>
-                          )}
-
                           <div className="mt-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700">
                             <div
                                 className={`text-2xl font-bold bg-gradient-to-r ${getRankColor(
                                     member.starTrekRank
-                                )} bg-clip-text text-transparent mb-2`}
+                                )} bg-clip-text text-transparent mb-1`}
                                 style={{ fontFamily: "Orbitron, sans-serif" }}
                             >
                               {member.starTrekRank}
                             </div>
-                            {member.starTrekRank && (
-                                <p className="text-sm text-gray-300">
-                                  {getRankDescription(member.starTrekRank)}
-                                </p>
-                            )}
+
                           </div>
                         </div>
                       </div>
@@ -429,15 +438,26 @@ export default async function BoardPage() {
                             >
                               {member.name}
                             </h3>
-                            <p className="text-xl text-purple-400 font-semibold mb-4">
+                            <p className="text-xl text-purple-400 font-semibold mb-2">
                               {member.role}
                             </p>
+
                           </div>
 
                           {member.description && (
-                              <p className="text-gray-300 leading-relaxed mb-6 text-lg">
-                                {member.description}
-                              </p>
+                              <div className="relative mb-6">
+                                <div className="absolute -top-4 -left-1 text-5xl text-yellow-500/25 select-none">
+                                  “
+                                </div>
+                                <div className="bg-gray-900/70 border border-gray-700/80 rounded-2xl px-6 py-5">
+                                  <p className="text-gray-100 leading-relaxed text-lg">
+                                    {member.description}
+                                  </p>
+                                </div>
+                                <div className="mt-2 text-xs uppercase tracking-wide text-yellow-400/80">
+                                  Journal de bord de {member.name}
+                                </div>
+                              </div>
                           )}
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -484,6 +504,15 @@ export default async function BoardPage() {
                       </div>
                     </div>
                 ))}
+              </div>
+
+              <div className="mt-16 text-center max-w-3xl mx-auto">
+                <p className="text-sm text-gray-400">
+                  Le bureau n’est pas une tour de contrôle isolée, mais une
+                  passerelle au service des adhérents&nbsp;: sans l’énergie,
+                  l’imagination et la participation de chacun, le club ne serait
+                  qu’une coque vide en orbite autour de ses rêves.
+                </p>
               </div>
             </div>
           </section>

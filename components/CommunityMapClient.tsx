@@ -35,7 +35,6 @@ export default function CommunityMapClient() {
                 setLoading(false);
             }
         };
-
         fetchMarkers();
     }, []);
 

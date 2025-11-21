@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
+
 export type BlogPostPageProps = {
     params: {
         slug: string;
@@ -110,8 +111,6 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
         <>
 
 
-
-
             <main className="pt-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
                     <div className="grid lg:grid-cols-4 gap-8">
@@ -190,7 +189,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
                                     <article
                                         className="prose prose-invert prose-headings:text-gray-100 prose-a:text-blue-400 max-w-none">
                                         <div
-                                            className="text-gray-200 leading-relaxed"
+                                            className="text-gray-200 leading-relaxed space-y-6"
                                             dangerouslySetInnerHTML={{__html: post.content}}
                                         />
                                     </article>
