@@ -552,7 +552,7 @@ export default function QuizEmbed({ quizId }: { quizId: number }) {
                         )}
 
                         {/* Navigation */}
-                        <div className="flex items-center justify-between pt-6 border-t border-gray-700">
+                        <div className="flex flex-col md:flex-row gap-4 items-center justify-between pt-6 border-t border-gray-700">
                             <button
                                 onClick={handlePreviousQuestion}
                                 disabled={currentQuestion === 0}
