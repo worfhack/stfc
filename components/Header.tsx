@@ -53,12 +53,12 @@ const Header = ({menu}) => {
                             className="object-contain drop-shadow-[0_0_6px_rgba(0,150,255,0.6)]"
                             priority
                         />
-                        <h1
+                        <div
                             className="text-xl font-bold"
                             style={{fontFamily: "Orbitron, sans-serif"}}
                         >
                             Star Trek French Club
-                        </h1>
+                        </div>
                     </Link>
 
                     {/* Menu desktop */}
