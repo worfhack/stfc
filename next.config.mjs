@@ -1,18 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true, // coupe ESLint en build
+    ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // coupe le type-check TS en build
+    ignoreBuildErrors: true,
   },
   reactStrictMode: true,
 
   images: {
-    domains: ['readdy.ai', 'startrek.local.fr', "api.startrekfrenchclub.fr", "wp.com", "*.wp.com"],
-
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.wp.com",   // ← wildcard OK ici
+      },
+      {
+        protocol: "https",
+        hostname: "wp.com",
+      },
+      {
+        protocol: "https",
+        hostname: "readdy.ai",
+      },
+      {
+        protocol: "https",
+        hostname: "startrek.local.fr",
+      },
+      {
+        protocol: "https",
+        hostname: "api.startrekfrenchclub.fr",
+      },
+    ],
   },
-
 };
 
 export default nextConfig;
