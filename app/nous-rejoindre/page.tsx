@@ -16,6 +16,7 @@ import {IconType} from "react-icons";
 import {cache} from "react";
 import {getImageUrl} from "@/lib/image";
 import {buildSeoMetadata} from "@/lib/seo";
+export const dynamic = "force-dynamic";
 
 // Types API
 type ApiImage = {

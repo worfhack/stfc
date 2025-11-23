@@ -11,6 +11,7 @@ import { getImageUrl } from "@/lib/image";
 import HomeClient from "./HomeClient";
 import {Metadata} from "next";
 import {buildSeoMetadata} from "@/lib/seo"; // composant client qui gère le scroll
+export const dynamic = "force-dynamic";
 
 const fetchHomeData = cache(async (): Promise<any> => {
   const baseUrl = process.env.NEXT_PUBLIC_WP_API;

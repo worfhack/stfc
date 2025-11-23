@@ -5,6 +5,7 @@ import {Metadata} from "next";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
 import {RiCheckLine} from "react-icons/ri";
+export const dynamic = "force-dynamic";
 
 
 const getContactData = cache(async (): Promise<ApiContactResponse> => {

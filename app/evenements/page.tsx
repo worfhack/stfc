@@ -12,6 +12,7 @@ import {getImageUrl} from "@/lib/image";
 import {cache} from "react";
 import Link from "next/link";
 // ...
+export const dynamic = "force-dynamic";
 
 type EventsPageProps = {
     searchParams?: {

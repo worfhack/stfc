@@ -23,6 +23,7 @@ import {cache} from "react";
 import {ApiCommunityResponse} from "@/app/types/community-page";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+export const dynamic = "force-dynamic";
 
 type IconName =
     | "ri-star-line"

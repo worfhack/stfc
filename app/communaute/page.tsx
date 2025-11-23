@@ -8,6 +8,7 @@ import {ApiCommunityResponse} from "@/app/types/community-page";
 import {Metadata} from "next";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+export const dynamic = "force-dynamic";
 
 
 const getCommunityData = cache(async (): Promise<ApiCommunityResponse> => {

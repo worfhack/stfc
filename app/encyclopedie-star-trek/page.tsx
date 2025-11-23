@@ -10,6 +10,7 @@ import {getImageUrl} from "@/lib/image";
 import ComeWithUs from "@/components/ComeWithUsSection";
 
 
+export const dynamic = "force-dynamic";
 
 
 const WP_API_URL = process.env.NEXT_PUBLIC_WP_API;

@@ -11,6 +11,7 @@ import ComeWithUs from "@/components/ComeWithUsSection";
 
 const WP_API_URL = process.env.NEXT_PUBLIC_WP_API;
 
+export const dynamic = "force-dynamic";
 
  const fetchFilmsSeries = cache(async (): Promise<FilmsSeriesApiResponse> => {
     const res = await fetch(`${WP_API_URL}/starfleet/v1/films-series`, {

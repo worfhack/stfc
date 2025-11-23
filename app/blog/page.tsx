@@ -11,6 +11,7 @@ import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
 
 const PER_PAGE_DEFAULT = 6;
+export const dynamic = "force-dynamic";
 
 
 const fetchBlogData = cache(async (

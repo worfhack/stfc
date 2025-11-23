@@ -4,6 +4,7 @@ import {ApiChronoResponse} from "@/app/chronologie-star-trek/types";
 import {cache} from "react";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+export const dynamic = "force-dynamic";
 
 const WP_API_BASE = process.env.NEXT_PUBLIC_WP_API;
 

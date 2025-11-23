@@ -13,6 +13,7 @@ import {
 import ComeWithUs from "@/components/ComeWithUsSection";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type ApiSeo = {
   seo_title?: string;

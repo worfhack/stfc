@@ -9,13 +9,10 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    domains: ['readdy.ai', 'startrek.local.fr', "demo.startrekfrenchclub.fr"],
+    domains: ['readdy.ai', 'startrek.local.fr', "api.startrekfrenchclub.fr"],
 
   },
 
- experimental: {
-    optimizeCss: true,
-  },
 };
 
 export default nextConfig;

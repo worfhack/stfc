@@ -20,6 +20,7 @@ import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
 
 
+export const dynamic = "force-dynamic";
 
 const valueIconMap: Record<string, IconType> = {
   heart: RiHeartLine,
