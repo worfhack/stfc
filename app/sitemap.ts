@@ -124,6 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         blogPaginationRoutes.push({
             url: `${BASE_URL}${path}`,
         });
+
     }
 
     return [
