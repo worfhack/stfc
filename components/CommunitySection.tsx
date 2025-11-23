@@ -96,7 +96,18 @@ const CommunitySection = ({community_items, texts}) => {
                         href={texts.community.helloAssoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-12 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-xl whitespace-nowrap cursor-pointer mb-6"
+                        className="
+            inline-flex items-center justify-center
+            bg-gradient-to-r from-green-500 to-blue-500
+            hover:from-green-600 hover:to-blue-600
+            text-white font-bold
+            py-4 px-6 md:px-12
+            rounded-lg
+            transition-all duration-300 transform hover:scale-105 hover:shadow-lg
+            text-lg md:text-xl
+            w-full sm:w-auto
+            cursor-pointer mb-6
+        "
                     >
                       <RiExternalLinkLine className="mr-3"/>
                       S&apos;inscrire sur HelloAsso
