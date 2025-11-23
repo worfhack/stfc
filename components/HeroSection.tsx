@@ -94,7 +94,7 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
             >
                 <div className="w-full">
                     <h1
-                        className="text-5xl md:text-7xl font-bold mb-6 leading-tight pt-5"
+                        className="text-5xl md:text-7xl font-bold mb-6 leading-tight mt-5"
                         style={{ fontFamily: "Orbitron, sans-serif" }}
                     >
                         {data?.title ? (
