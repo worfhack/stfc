@@ -60,42 +60,35 @@ async function fetchAllWp<T>(
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 1️⃣ Routes statiques (ton ancien sitemap.xml)
     const staticRoutes: MetadataRoute.Sitemap = [
-        { url: `${BASE_URL}/`, lastModified: new Date().toISOString() },
+        { url: `${BASE_URL}/`,  },
 
-        { url: `${BASE_URL}/activites`, lastModified: new Date().toISOString() },
-        { url: `${BASE_URL}/blog`, lastModified: new Date().toISOString() },
+        { url: `${BASE_URL}/activites`, },
+        { url: `${BASE_URL}/blog`,  },
         {
             url: `${BASE_URL}/chronologie-star-trek`,
-            lastModified: new Date().toISOString(),
         },
-        { url: `${BASE_URL}/communaute`, lastModified: new Date().toISOString() },
+        { url: `${BASE_URL}/communaute`,},
         {
             url: `${BASE_URL}/encyclopedie-star-trek`,
-            lastModified: new Date().toISOString(),
         },
-        { url: `${BASE_URL}/evenements`, lastModified: new Date().toISOString() },
+        { url: `${BASE_URL}/evenements`,  },
         {
             url: `${BASE_URL}/films-series-star-trek`,
-            lastModified: new Date().toISOString(),
         },
         {
             url: `${BASE_URL}/notre-histoire`,
-            lastModified: new Date().toISOString(),
         },
         {
             url: `${BASE_URL}/nous-contacter`,
-            lastModified: new Date().toISOString(),
         },
         {
             url: `${BASE_URL}/nous-rejoindre`,
-            lastModified: new Date().toISOString(),
         },
 
-        { url: `${BASE_URL}/types`, lastModified: new Date().toISOString() },
-        { url: `${BASE_URL}/univers`, lastModified: new Date().toISOString() },
+        { url: `${BASE_URL}/types`,  },
+        { url: `${BASE_URL}/univers`,  },
         {
             url: `${BASE_URL}/vie-association`,
-            lastModified: new Date().toISOString(),
         },
     ];
 
@@ -107,7 +100,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .filter((p) => !p.template || p.template === "default") // template par défaut
         .map((p) => ({
             url: `${BASE_URL}/page/${p.slug}`,
-            lastModified: p.modified || new Date().toISOString(),
         }));
 
     // 3️⃣ Articles WP -> /blog/[slug]
@@ -118,7 +110,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .filter((p) => p.status === "publish")
         .map((post) => ({
             url: `${BASE_URL}/blog/${post.slug}`,
-            lastModified: post.modified || post.date || new Date().toISOString(),
         }));
 
     // 4️⃣ Pagination du blog -> /blog/page/[n]
@@ -132,7 +123,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const path = page === 1 ? "/blog" : `/blog/page/${page}`;
         blogPaginationRoutes.push({
             url: `${BASE_URL}${path}`,
-            lastModified: new Date().toISOString(),
         });
     }
 
