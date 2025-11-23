@@ -93,7 +93,6 @@ const fetchBoardPage = cache(async (): Promise<BoardApiResponse> => {
   if (!res.ok) {
     throw new Error("Failed to fetch board page");
   }
-
   return res.json();
 });
 
