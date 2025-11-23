@@ -13,7 +13,7 @@ type NavItem = {
     children?: { name: string; path: string }[];
 };
 
-const Header = () => {
+const Header = ({menu}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
         null
@@ -26,21 +26,18 @@ const Header = () => {
         if (path !== "/" && pathname.startsWith(path)) return true;
         return false;
     };
+    console.log(menu)
 
-    const navItems: NavItem[] = [
-        {name: "Accueil", path: "/"},
-        {name: "Événements", path: "/evenements"},
-        {name: "Activités", path: "/activites"},
-        {name: "Communauté", path: "/communaute"},
-        {
-            name: "Association",
-            children: [
-                {name: "La vie de l'association", path: "/vie-association"},
-                {name: "Notre histoire", path: "/notre-histoire"},
-            ],
-        },
-        {name: "Blog", path: "/blog"},
-    ];
+    const navItems: NavItem[] = menu.map((item) => ({
+        name: item.label,
+        path: item.url || undefined,
+        children: item.children?.length
+            ? item.children.map((child) => ({
+                name: child.label,
+                path: child.url || undefined,
+            }))
+            : undefined,
+    }));
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-blue-500/20">

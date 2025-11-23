@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
+import BlogContentWithQuizzes from "@/components/BlogContentWithQuizzes";
 
 export type BlogPostPageProps = {
     params: {
@@ -115,7 +116,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
                     <div className="grid lg:grid-cols-4 gap-8">
                         <div className="lg:col-span-1 order-2 lg:order-1">
-                            <div className="sticky top-24 space-y-6">
+                            <div className="sticky top-[10rem] space-y-6">
 
                                 {/* Author Info */}
                                 <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
@@ -188,10 +189,7 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
 
                                     <article
                                         className="prose prose-invert prose-headings:text-gray-100 prose-a:text-blue-400 max-w-none">
-                                        <div
-                                            className="text-gray-200 leading-relaxed space-y-6"
-                                            dangerouslySetInnerHTML={{__html: post.content}}
-                                        />
+                                        <BlogContentWithQuizzes html={post.content}/>
                                     </article>
 
                                     {/* Navigation précédent / suivant */}
@@ -253,15 +251,14 @@ export default async function BlogPostPage({params}: BlogPostPageProps) {
                                         </section>
                                     )}
 
-                                    {/* Bas de page : CTA / partage */}
                                     <div
                                         className="mt-12 border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                         <p className="text-gray-400 text-sm">
                                             Tu veux réagir à cet article, partager une théorie ou proposer
-                                            un sujet ? Rejoins la discussion sur le serveur du club !
+                                            un sujet ? !
                                         </p>
                                         <Link
-                                            href="/community"
+                                            href="/nous-rejoindre"
                                             className="inline-flex items-center rounded-full bg-blue-600 px-4 py-2 text-sm font-medium hover:bg-blue-500 transition shadow-lg shadow-blue-600/30"
                                         >
                                             Rejoindre l’équipage

@@ -1,82 +1,69 @@
-const CommunitySection = () => {
-  const stats = [
-    { number: '15', label: 'Membres Passionnés', icon: 'ri-group-line' },
-    { number: '6', label: 'Années d\'Existence', icon: 'ri-time-line' },
-    { number: '25+', label: 'Rencontres Organisées', icon: 'ri-calendar-event-line' },
-    { number: '100%', label: 'Passion Partagée', icon: 'ri-heart-line' }
-  ];
+import {IconType} from "react-icons";
+import {RiCalendarLine, RiExternalLinkLine, RiStarLine, RiTeamLine, RiVipCrownLine} from "react-icons/ri";
 
-  const testimonials = [
-    {
-      name: 'Marie L.',
-      text: 'Un petit club chaleureux où l\'on se sent vraiment en famille. Chaque membre compte et participe activement.',
-      avatar: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20happy%20Star%20Trek%20fan%20woman%2C%20modern%20headshot%2C%20genuine%20smile%2C%20casual%20attire%2C%20satisfied%20community%20member%2C%20positive%20expression&width=80&height=80&seq=testimonial-home-1&orientation=squarish'
-    },
-    {
-      name: 'Thomas M.',
-      text: 'L\'avantage d\'un petit groupe : tout le monde se connaît et les discussions sont vraiment enrichissantes.',
-      avatar: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20enthusiastic%20Star%20Trek%20fan%20man%2C%20modern%20headshot%2C%20bright%20smile%2C%20casual%20attire%2C%20happy%20community%20member%2C%20energetic%20expression&width=80&height=80&seq=testimonial-home-2&orientation=squarish'
-    },
-    {
-      name: 'Sophie D.',
-      text: 'Une atmosphère conviviale et bienveillante. Parfait pour partager sa passion avec de vrais amis trekkies.',
-      avatar: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20content%20Star%20Trek%20fan%20woman%2C%20modern%20headshot%2C%20warm%20smile%2C%20casual%20attire%2C%20satisfied%20member%2C%20friendly%20appearance&width=80&height=80&seq=testimonial-home-3&orientation=squarish'
-    }
-  ];
+
+const benefitIconMap: Record<string, IconType> = {
+  "ri-vip-crown-line": RiVipCrownLine,
+  "ri-calendar-event-line": RiCalendarLine,
+  "ri-team-line": RiTeamLine,
+};
+
+const CommunitySection = ({community_items, texts}) => {
+  const defaultItems: [] = [];
+  console.log(community_items)
+  const items = community_items && community_items.length > 0 ?community_items  : defaultItems;
+  console.log(texts)
+  function getBenefitIcon(iconKey: string | undefined): IconType {
+    if (!iconKey) return RiStarLine;
+    return benefitIconMap[iconKey] ?? RiStarLine;
+  }
 
   return (
       <section id="communaute" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2
+                className="text-4xl md:text-5xl font-bold mb-6"
+                style={{fontFamily: "Orbitron, sans-serif"}}
+            >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              Notre Communauté
+              {texts?.community?.title || ""}
             </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Rejoignez une famille de passionnés qui partagent votre amour pour l'univers Star Trek
+              {texts?.community?.subtitle || ""}
             </p>
           </div>
 
-
-
-          {/* Community Features */}
+          {/* Community Features (items) */}
           <div className="grid lg:grid-cols-2 gap-12 mb-20">
             <div className="space-y-8">
-              <h3 className="text-3xl font-bold text-blue-400 mb-6" style={{ fontFamily: 'Orbitron, sans-serif' }}>
-                Pourquoi Nous Rejoindre ?
+              <h3
+                  className="text-3xl font-bold text-blue-400 mb-6"
+                  style={{fontFamily: "Orbitron, sans-serif"}}
+              >
+                {texts?.community?.text_engagement || ""}
               </h3>
 
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-blue-600 rounded-full flex-shrink-0">
-                    <i className="ri-shield-star-line text-xl text-white"></i>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Accès Exclusif</h4>
-                    <p className="text-gray-300">Bénéficiez d'un accès privilégié aux avant-premières, interviews exclusives et contenus inédits.</p>
-                  </div>
-                </div>
+                {items.map((item, index) => {
+                  const Icon = getBenefitIcon(item.icon);
+                  return (
+                      <div key={index} className="flex items-start space-x-4">
+                        <div
+                            className="w-12 h-12 flex items-center justify-center bg-blue-600 rounded-full flex-shrink-0">
+                          <Icon className="text-2xl text-white"/>
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-semibold text-white mb-2">
+                            {item.title}
+                          </h4>
+                          <p className="text-gray-300">{item.description}</p>
+                        </div>
+                      </div>
+                  );
+                })}
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-purple-600 rounded-full flex-shrink-0">
-                    <i className="ri-team-line text-xl text-white"></i>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Réseau de Passionnés</h4>
-                    <p className="text-gray-300">Connectez-vous avec des fans du monde entier et créez des amitiés durables.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-green-600 rounded-full flex-shrink-0">
-                    <i className="ri-trophy-line text-xl text-white"></i>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Récompenses & Concours</h4>
-                    <p className="text-gray-300">Participez à des concours réguliers et gagnez des objets de collection rares.</p>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -89,6 +76,44 @@ const CommunitySection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent rounded-2xl"></div>
             </div>
           </div>
+
+
+          <section className="py-20 px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto">
+              <div
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-white mb-4">{texts?.community?.text_inscription || ""}</h2>
+                  <h2 className="text-3xl font-bold text-white mb-4">
+
+                  </h2>
+
+                </div>
+
+
+                {texts.community.helloAssoUrl && texts.community.helloAssoUrl !== "#" ? (
+                    <a
+                        href={texts.community.helloAssoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-12 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-xl whitespace-nowrap cursor-pointer mb-6"
+                    >
+                      <RiExternalLinkLine className="mr-3"/>
+                      S&apos;inscrire sur HelloAsso
+                    </a>
+                ) : (
+                    <button
+                        className="bg-gray-700 text-gray-300 font-bold py-4 px-12 rounded-lg text-xl mb-6 cursor-not-allowed"
+                        disabled
+                    >
+                      Lien HelloAsso à venir
+                    </button>
+                )}
+
+              </div>
+            </div>
+          </section>
+
 
         </div>
       </section>

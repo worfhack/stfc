@@ -12,6 +12,7 @@ const nextConfig = {
     domains: ['readdy.ai', 'startrek.local.fr', "demo.startrekfrenchclub.fr"],
 
   },
+
  experimental: {
     optimizeCss: true,
   },

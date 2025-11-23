@@ -15,6 +15,7 @@ import {
 import {IconType} from "react-icons";
 import {cache} from "react";
 import {getImageUrl} from "@/lib/image";
+import {buildSeoMetadata} from "@/lib/seo";
 
 // Types API
 type ApiImage = {
@@ -89,38 +90,8 @@ const fetchInscriptionPage = cache(async (): Promise<ApiInscriptionResponse> => 
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-    let data: ApiInscriptionResponse | null = null;
-
-    try {
-        data = await fetchInscriptionPage();
-    } catch (e) {
-        return {
-            title:
-                "Adhésion Star Trek French Club – Devenez membre officiel de la Flotte",
-            description:
-                "Rejoignez la communauté du Star Trek French Club. Badge officiel, accès prioritaire aux événements, participation aux conventions et avantages exclusifs.",
-        };
-    }
-
-    const seoTitle =
-        data.seo?.seo_title ||
-        "Adhésion Star Trek French Club – Devenez membre officiel de la Flotte";
-    const seoDescription =
-        data.seo?.seo_description ||
-        "Rejoignez la communauté du Star Trek French Club. Badge officiel, accès prioritaire aux événements, participation aux conventions et avantages exclusifs.";
-    const ogImageUrl = data.seo?.seo_image
-        ? getImageUrl(data.seo.seo_image)
-        : undefined;
-
-    return {
-        title: seoTitle,
-        description: seoDescription,
-        openGraph: {
-            title: seoTitle,
-            description: seoDescription,
-            images: ogImageUrl ? [ogImageUrl] : [],
-        },
-    };
+    const data = await fetchInscriptionPage();
+    return buildSeoMetadata(data.seo, getImageUrl);
 }
 
 export default async function InscriptionPage() {

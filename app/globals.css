@@ -8,3 +8,26 @@
     width: 100%;
     height: 100%;
 }
+.grecaptcha-badge {
+    visibility: hidden !important;
+}
+
+.wp-block-image img {
+    @apply rounded-lg;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 1rem;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1rem;
+}

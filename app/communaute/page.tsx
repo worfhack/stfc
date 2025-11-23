@@ -41,7 +41,7 @@ export default async function CommunityPage() {
     const heroTitle = communityData?.hero?.title ?? "";
     const heroSubtitle = communityData?.hero?.subtitle ?? "";
     const heroText = communityData?.hero?.text ?? "";
-
+    const heroBg = communityData?.hero?.background?.url ?? "";
     const introTitle = communityData?.intro?.title ?? "";
 
     const introParagraphs =
@@ -66,7 +66,12 @@ export default async function CommunityPage() {
             <main className="pt-20">
                 <section className="relative py-20 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20">
                     <div
-                        className="absolute inset-0 bg-[url('https://readdy.ai/api/search-image?query=Small%20Star%20Trek%20fan%20group%20sitting%20together%20in%20circle%2C%20intimate%20community%20gathering%2C%20friendship%20and%20unity%2C%20cozy%20atmosphere%2C%20teamwork%20spirit%2C%20inclusive%20small%20group&width=1920&height=800&seq=community-hero-bg&orientation=landscape')] bg-cover bg-center opacity-20"></div>
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `url('${heroBg || ""}')`,
+                        }}
+                    ></div>
+
                     <div className="relative max-w-5xl mx-auto px-6 text-center">
                         <h1
                             className="text-5xl md:text-6xl font-bold mb-6"

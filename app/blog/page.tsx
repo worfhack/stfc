@@ -202,14 +202,13 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
                                                 {post.title}
                                             </h3>
 
-                                            <p className="text-gray-400 mb-4 line-clamp-2">
+                                            <p className="text-gray-400 mb-4 line-clamp-4">
                                                 {post.excerpt}
                                             </p>
 
                                             <div className="flex items-center justify-between text-xs text-gray-500">
                                                 <span>{post.author}</span>
                                                 <span>{post.date}</span>
-                                                <span>{post.readTime}</span>
                                             </div>
                                         </div>
                                     </Link>
@@ -217,7 +216,6 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
                             </div>
                         )}
 
-                        {/* Pagination */}
                         {pagination && pagination.total_pages > 1 && (
                             <div className="mt-12 flex items-center justify-center gap-4">
                                 {/* Previous */}

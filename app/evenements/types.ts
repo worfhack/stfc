@@ -47,11 +47,19 @@ export type ApiEvent = {
     excerpt?: string;
     content?: string;
     event_date?: string; // YYYY-MM-DD
+    event_date_display?: string; // YYYY-MM-DD
     event_time?: string;
     location?: string;
     image?: string | null;
+    can_register?: boolean;
     categories?: ApiEventCategory[];
     permalink?: string;
+};
+export type ApiPagination = {
+    current_page: number;
+    per_page: number;
+    total_events: number;
+    total_pages: number;
 };
 
 // ---- PAYLOAD COMPLET FOURNI PAR L’API ----
@@ -60,6 +68,8 @@ export type ApiEventsOverview = {
     page?: ApiPage | null;
     events?: ApiEvent[];
     categories?: ApiCategory[];
+    pagination?: ApiPagination;
+
 };
 
 // ---- UI (front) ----

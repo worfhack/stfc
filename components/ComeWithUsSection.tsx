@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 const ComeWithUs = () => {
@@ -16,16 +17,14 @@ const ComeWithUs = () => {
                     activités passionnantes
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
+                    <Link href="/nous-rejoindre"
                         className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 whitespace-nowrap">
-                        <i className="ri-user-add-line mr-2"></i>
                         Devenir Membre
-                    </button>
-                    <button
+                    </Link>
+                    <Link href="/evenements"
                         className="bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 whitespace-nowrap">
-                        <i className="ri-calendar-line mr-2"></i>
                         Voir les Événements
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

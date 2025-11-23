@@ -1,4 +1,5 @@
 import {ApiSeo} from "@/app/types/seo";
+import {ApiGImage} from "@/app/types/image";
 
 export type ApiCommunityIntroParagraph = {
     text?: string;
@@ -13,6 +14,7 @@ export type ApiCommunityHero = {
     title?: string;
     subtitle?: string;
     text?: string;
+    background:ApiGImage | undefined
 };
 
 export type ApiCommunityIntro = {
