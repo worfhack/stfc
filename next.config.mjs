@@ -27,6 +27,10 @@ const nextConfig = {
         hostname: "startrek.local.fr",
       },
       {
+        protocol: "http",
+        hostname: "startrek.local.fr",
+      },
+      {
         protocol: "https",
         hostname: "api.startrekfrenchclub.fr",
       },

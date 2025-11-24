@@ -23,6 +23,7 @@ import {cache} from "react";
 import {ApiCommunityResponse} from "@/app/types/community-page";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 type IconName =
@@ -294,13 +295,17 @@ export default async function ActivitiesPage() {
                           >
                             <div className="lg:w-1/2">
                               <div className="relative overflow-hidden rounded-2xl">
-                                {activity.image && (
-                                    <img
-                                        src={activity.image}
-                                        alt={activity.title}
-                                        className="w-full h-80 object-cover object-top"
-                                    />
-                                )}
+                                  {activity.image && (
+                                      <Image
+                                          src={activity.image}
+                                          alt={activity.title}
+                                          width={592}   // taille de base desktop
+                                          height={320}
+                                          className="w-full h-80 object-cover object-top"
+                                          loading="lazy"
+                                          sizes="(max-width: 768px) 364px, 592px"
+                                      />
+                                  )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
                               </div>
                             </div>
