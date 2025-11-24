@@ -1,5 +1,6 @@
 import {IconType} from "react-icons";
 import {RiCalendarLine, RiExternalLinkLine, RiStarLine, RiTeamLine, RiVipCrownLine} from "react-icons/ri";
+import Image from "next/image";
 
 
 const benefitIconMap: Record<string, IconType> = {
@@ -68,11 +69,19 @@ const CommunitySection = ({community_items, texts}) => {
             </div>
 
             <div className="relative">
-              <img
-                  src="https://readdy.ai/api/search-image?query=Star%20Trek%20fans%20community%20gathering%20in%20modern%20space%2C%20diverse%20group%20of%20people%20discussing%2C%20friendly%20atmosphere%2C%20futuristic%20meeting%20room%2C%20collaborative%20environment%2C%20inclusive%20community&width=600&height=500&seq=community-main&orientation=landscape"
-                  alt="Communauté Star Trek"
-                  className="w-full h-full object-cover object-top rounded-2xl"
-              />
+
+              {texts?.community?.image && (
+                  <Image
+                      src={texts?.community?.image}
+                      width={592}   // taille de base desktop
+                      height={499}
+                      alt="Communauté Star Trek"
+
+                      className="w-full h-full object-cover object-top rounded-2xl"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 366px, 592px"
+                  />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent rounded-2xl"></div>
             </div>
           </div>
