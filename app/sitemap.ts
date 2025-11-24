@@ -85,7 +85,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${BASE_URL}/nous-rejoindre`,
         },
 
-        { url: `${BASE_URL}/types`,  },
         { url: `${BASE_URL}/univers`,  },
         {
             url: `${BASE_URL}/vie-association`,
