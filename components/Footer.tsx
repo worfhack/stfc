@@ -168,7 +168,7 @@ const Footer = ({menuFooter, menuLegal, apiSocialLinks, seoFooterText, newslette
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <RiMailLine className="text-blue-400 mt-1" />
-                  <p className="text-gray-300">contact@startrekfrench.fr</p>
+                  <p className="text-gray-300">stfc@outlook.fr</p>
                 </div>
 
                 <div className="flex items-start space-x-3">
