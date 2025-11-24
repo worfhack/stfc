@@ -2,6 +2,7 @@ import Link from "next/link";
 import {useState} from "react";
 import {ApiEvent} from "@/app/evenements/types";
 import {EventRegistrationModal} from "@/components/EventRegistrationModal";
+import Image from "next/image";
 
 
 
@@ -69,11 +70,18 @@ const ArticlesSection = ({ articles, texts }) => {
                         >
                           <div className="relative overflow-hidden">
                             {post.image && (
-                                <img
+
+                                <Image
                                     src={post.image}
                                     alt={post.title}
+                                    width={371}   // taille de base desktop
+                                    height={192}
                                     className="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 292, 371"
                                 />
+
                             )}
                             <div className="absolute top-4 left-4">
                         <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
