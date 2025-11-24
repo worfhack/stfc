@@ -1,4 +1,5 @@
 import ComeWithUs from "@/components/ComeWithUsSection";
+import Image from "next/image";
 
 const ActivitiesSection = ({activities, texts}) => {
 
@@ -33,11 +34,18 @@ const ActivitiesSection = ({activities, texts}) => {
                     className="group bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105"
                 >
                   <div className="relative overflow-hidden rounded-xl mb-6">
-                    <img
-                        src={activity.image?.url}
-                        alt={activity.title}
-                        className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110"
-                    />
+                    {activity.image && (
+                        <Image
+                            src={activity.image?.url}
+                            alt={activity.title}
+                            width={592}   // taille de base desktop
+                            height={320}
+                            className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                            sizes="(max-width: 768px) 364px, 592px"
+                        />
+                    )}
+
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
 
                   </div>
