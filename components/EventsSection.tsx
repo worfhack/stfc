@@ -2,6 +2,7 @@ import Link from "next/link";
 import {useState} from "react";
 import {ApiEvent} from "@/app/evenements/types";
 import {EventRegistrationModal} from "@/components/EventRegistrationModal";
+import Image from "next/image";
 
 
 
@@ -62,11 +63,16 @@ const EventsSection = ({ events, texts }) => {
                     className="group bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105"
                 >
                   <div className="relative overflow-hidden">
-                    <img
-                        src={event.image || fallbackEvents[index]?.image}
-                        alt={event.title || "Événement Star Trek"}
-                        className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110"
-                    />
+
+                      <Image
+                          src={event.image || fallbackEvents[index]?.image}
+                          alt={event.title || "Événement Star Trek"}
+                          width={387}   // taille de base desktop
+                          height={192}
+                          className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-110"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 380, 387px"
+                      />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                     <div className="absolute top-4 left-4">
                       <div className="bg-purple-600/90 backdrop-blur-sm rounded-lg px-3 py-2">
