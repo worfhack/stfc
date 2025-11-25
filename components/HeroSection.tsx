@@ -1,4 +1,5 @@
 import { RiRocket2Line, RiCompass3Line } from "react-icons/ri";
+import Image from "next/image";
 
 interface HeroData {
     title?: string;
@@ -36,15 +37,23 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
         <section
             id="accueil"
             className="relative min-h-screen flex items-center justify-center overflow-hidden"
-            style={{
-                backgroundImage: `url('${bgImage}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundAttachment: "fixed",
-            }}
+            // style={{
+            //     backgroundImage: `url('${bgImage}')`,
+            //     backgroundSize: "cover",
+            //     backgroundPosition: "center",
+            //     backgroundAttachment: "fixed",
+            // }}
         >
+            <Image
+                src={bgImage}
+                alt="Fond d'écran"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+            />
 
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-transparent"/>
 
             {/* Parallax stars */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -55,7 +64,7 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
                         transform: `translateY(${scrollY * 0.05}px)`,
                     }}
                 >
-                    {Array.from({ length: STAR_COUNT_LAYER_1 }).map((_, i) => (
+                    {Array.from({length: STAR_COUNT_LAYER_1}).map((_, i) => (
                         <div
                             key={`star-layer1-${i}`}
                             className="absolute w-1 h-1 bg-white/80 rounded-full"
@@ -74,7 +83,7 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
                         transform: `translateY(${scrollY * 0.1}px)`,
                     }}
                 >
-                    {Array.from({ length: STAR_COUNT_LAYER_2 }).map((_, i) => (
+                    {Array.from({length: STAR_COUNT_LAYER_2}).map((_, i) => (
                         <div
                             key={`star-layer2-${i}`}
                             className="absolute w-1.5 h-1.5 bg-white rounded-full animate-pulse"
@@ -90,12 +99,12 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
 
             <div
                 className="relative z-10 max-w-6xl mx-auto px-6 text-left"
-                style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+                style={{transform: `translateY(${scrollY * 0.3}px)`}}
             >
                 <div className="w-full">
                     <h1
                         className="text-5xl md:text-7xl font-bold mb-6 leading-tight mt-5"
-                        style={{ fontFamily: "Orbitron, sans-serif" }}
+                        style={{fontFamily: "Orbitron, sans-serif"}}
                     >
                         {data?.title ? (
                             // Titre venant de WP (hero_title)
@@ -103,10 +112,11 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
                         ) : (
                             // Fallback design actuel
                             <>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                                <span
+                                    className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                                     Explorez
                                 </span>
-                                <br />
+                                <br/>
                                 <span className="text-white">
                                     l&apos;Univers Star Trek
                                 </span>
@@ -123,14 +133,14 @@ const HeroSection = ({ scrollY, data }: HeroSectionProps) => {
                             href={primaryHref}
                             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 cursor-pointer text-center whitespace-nowrap inline-flex items-center justify-center"
                         >
-                            <RiRocket2Line className="mr-2" />
+                            <RiRocket2Line className="mr-2"/>
                             {primaryLabel}
                         </a>
                         <a
                             href={secondaryHref}
                             className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer text-center whitespace-nowrap inline-flex items-center justify-center"
                         >
-                            <RiCompass3Line className="mr-2" />
+                            <RiCompass3Line className="mr-2"/>
                             {secondaryLabel}
                         </a>
                     </div>
