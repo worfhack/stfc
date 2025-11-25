@@ -96,7 +96,6 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
 
     const apiCategories = data?.categories ?? [];
 
-// On ajoute "Tous" en tête, puis les catégories WP
     const categories = [
         {name: "Tous", slug: ""},
         ...apiCategories.map((cat) => ({

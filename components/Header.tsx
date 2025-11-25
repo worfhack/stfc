@@ -26,7 +26,6 @@ const Header = ({menu}) => {
         if (path !== "/" && pathname.startsWith(path)) return true;
         return false;
     };
-    console.log(menu)
 
     const navItems: NavItem[] = menu.map((item) => ({
         name: item.label,

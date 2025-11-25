@@ -109,7 +109,6 @@ export default async function InscriptionPage() {
     const priceLabel = data.pricing?.label || "";
     const helloAssoUrl = data.helloasso_url || "#";
     const membershipBenefits = data.benefits && data.benefits.length > 0 ? data.benefits : [];
-    console.log(data)
     return (
         <div className="min-h-screen bg-gray-900 text-white">
             <main className="pt-20">

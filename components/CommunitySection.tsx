@@ -11,9 +11,7 @@ const benefitIconMap: Record<string, IconType> = {
 
 const CommunitySection = ({community_items, texts}) => {
   const defaultItems: [] = [];
-  console.log(community_items)
   const items = community_items && community_items.length > 0 ?community_items  : defaultItems;
-  console.log(texts)
   function getBenefitIcon(iconKey: string | undefined): IconType {
     if (!iconKey) return RiStarLine;
     return benefitIconMap[iconKey] ?? RiStarLine;

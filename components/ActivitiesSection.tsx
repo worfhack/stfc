@@ -5,7 +5,6 @@ const ActivitiesSection = ({activities, texts}) => {
 
 
   const count = activities.length;
-  console.log(count)
   const colMap: Record<number, string> = {
     1: "grid-cols-1",
     2: "grid-cols-2",

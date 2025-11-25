@@ -5,6 +5,11 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
 import BlogContentWithQuizzes from "@/components/BlogContentWithQuizzes";
+import type {Metadata} from "next";
+import {buildSeoMetadata} from "@/lib/seo";
+import {getImageUrl} from "@/lib/image";
+import {cache} from "react";
+import {ApiCommunityResponse} from "@/app/types/community-page";
 
 export type BlogPostPageProps = {
     params: {
@@ -61,9 +66,8 @@ type BlogListApiResponse = {
 //     }));
 // }
 
-async function fetchBlogPost(
-    slug: string
-): Promise<BlogPostApiResponse | null> {
+const fetchBlogPost = cache(async (slug): Promise<BlogPostApiResponse | null > => {
+
     const wp = process.env.NEXT_PUBLIC_WP_API;
     if (!wp) {
         console.error("NEXT_PUBLIC_WP_API non défini");
@@ -82,6 +86,15 @@ async function fetchBlogPost(
 
     const data = (await res.json()) as BlogPostApiResponse;
     return data;
+});
+
+export async function generateMetadata({params}: BlogPostPageProps)
+{
+const data = await fetchBlogPost(await params.slug);
+data.seo.seo_title = data.seo.seo_title + " – Star Trek French Club"
+
+
+    return buildSeoMetadata(data.seo, getImageUrl);
 }
 
 
@@ -99,7 +112,8 @@ function formatDateFr(dateString: string): string {
 
 // --- Page ---
 
-export default async function BlogPostPage({params}: BlogPostPageProps) {
+export default async function BlogPostPage({params}: BlogPostPageProps)
+{
     const data = await fetchBlogPost(params.slug);
 
     if (!data) {
