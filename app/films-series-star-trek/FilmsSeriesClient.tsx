@@ -51,7 +51,11 @@ export default function FilmsSeriesClient({
   >("chronologique");
 
   const currentViewingList = viewingOrders[viewingOrder] ?? [];
-
+  function getTabSectionClasses(section: "series" | "films" | "ordre", active: "series" | "films" | "ordre") {
+    return section === active
+        ? "block py-16"
+        : "hidden py-16";
+  }
   return (
       <>
         {/* Hero Section */}
@@ -153,8 +157,7 @@ export default function FilmsSeriesClient({
         </section>
 
         {/* Series Section */}
-        {activeTab === "series" && (
-            <section className="py-16">
+            <section className={getTabSectionClasses("series", activeTab)} >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 text-center">
                   <h2
@@ -258,11 +261,8 @@ export default function FilmsSeriesClient({
                 </div>
               </div>
             </section>
-        )}
 
-        {/* Films Section */}
-        {activeTab === "films" && (
-            <section className="py-16">
+            <section className={getTabSectionClasses("films", activeTab)}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 text-center">
                   <h2
@@ -330,11 +330,9 @@ export default function FilmsSeriesClient({
                 </div>
               </div>
             </section>
-        )}
 
         {/* Viewing Order Section */}
-        {activeTab === "ordre" && (
-            <section className="py-16">
+            <section className={getTabSectionClasses("ordre", activeTab)}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 text-center">
                   <h2
@@ -449,7 +447,6 @@ export default function FilmsSeriesClient({
                 </div>
               </div>
             </section>
-        )}
       </>
   );
 }
