@@ -8,6 +8,7 @@ import {cache} from "react";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
 import ComeWithUs from "@/components/ComeWithUsSection";
+import Maillage from "@/components/maillage";
 
 
 export const dynamic = "force-dynamic";
@@ -93,6 +94,7 @@ export default async function EncyclopediePage() {
 
                 {/* Partie interactive client (catégories + contenu) */}
                 <EncyclopedieClient categories={data.categories}/>
+                <Maillage data={data.maillage}/>
                 <ComeWithUs />
             </main>
 

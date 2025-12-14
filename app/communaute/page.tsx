@@ -8,6 +8,7 @@ import {ApiCommunityResponse} from "@/app/types/community-page";
 import {Metadata} from "next";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+import Maillage from "@/components/maillage";
 export const dynamic = "force-dynamic";
 
 
@@ -170,7 +171,7 @@ export default async function CommunityPage() {
 
                     </div>
                 </section>
-
+                <Maillage data={communityData.maillage}/>
                 <ComeWithUs/>
             </main>
 

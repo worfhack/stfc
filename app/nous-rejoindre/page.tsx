@@ -16,6 +16,7 @@ import {IconType} from "react-icons";
 import {cache} from "react";
 import {getImageUrl} from "@/lib/image";
 import {buildSeoMetadata} from "@/lib/seo";
+import Maillage from "@/components/maillage";
 export const dynamic = "force-dynamic";
 
 // Types API
@@ -261,6 +262,7 @@ export default async function InscriptionPage() {
                     </section>
 
                 )}
+                <Maillage data={data.maillage}/>
             </main>
         </div>
     );

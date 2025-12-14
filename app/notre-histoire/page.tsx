@@ -18,6 +18,7 @@ import {cache} from "react";
 import {Metadata} from "next";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
+import Maillage from "@/components/maillage";
 
 
 export const dynamic = "force-dynamic";
@@ -266,7 +267,7 @@ const AboutPage = async () => {
             </div>
           </section>
 
-
+          <Maillage data={data.maillage}/>
           <ComeWithUs/>
         </main>
       </div>

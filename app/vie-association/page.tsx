@@ -3,6 +3,7 @@ import { buildSeoMetadata } from "@/lib/seo";
 import { getImageUrl } from "@/lib/image";
 import { cache } from "react";
 import Link from "next/link";
+import Maillage from "@/components/maillage";
 
 type ApiMember = {
   name: string;
@@ -534,6 +535,7 @@ export default async function BoardPage() {
                 </div>
               </section>
           )}
+          <Maillage data={data.maillage}/>
         </main>
 
         {/*<Footer />*/}

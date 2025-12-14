@@ -116,42 +116,52 @@ export default function FilmsSeriesClient({
         </section>
 
         {/* Tab Navigation */}
-        <section className="sticky top-20 z-40 bg-gray-900/95 backdrop-blur-sm border-y border-gray-700 py-4">
+        {/* Tab Navigation */}
+        <section className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-center gap-4">
-              <button
-                  onClick={() => setActiveTab("series")}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition whitespace-nowrap ${
-                      activeTab === "series"
-                          ? "bg-blue-600 text-white"
-                          : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                  }`}
-              >
-                <i className="ri-tv-line text-xl" />
-                Séries TV
-              </button>
-              <button
-                  onClick={() => setActiveTab("films")}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition whitespace-nowrap ${
-                      activeTab === "films"
-                          ? "bg-red-600 text-white"
-                          : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                  }`}
-              >
-                <i className="ri-movie-line text-xl" />
-                Films
-              </button>
-              <button
-                  onClick={() => setActiveTab("ordre")}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition whitespace-nowrap ${
-                      activeTab === "ordre"
-                          ? "bg-purple-600 text-white"
-                          : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                  }`}
-              >
-                <i className="ri-list-ordered text-xl" />
-                Ordre de Visionnage
-              </button>
+            {/* padding vertical séparé pour éviter que le sticky “tremble” */}
+            <div className="py-3">
+
+              {/* mobile: scroll horizontal / desktop: centré */}
+              <div className="-mx-4 px-4 overflow-x-auto no-scrollbar">
+                <div className="flex items-center gap-3 min-w-max sm:justify-center">
+                  <button
+                      onClick={() => setActiveTab("series")}
+                      className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap ${
+                          activeTab === "series"
+                              ? "bg-blue-600 text-white"
+                              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                      }`}
+                  >
+                    <i className="ri-tv-line text-xl" />
+                    Séries TV
+                  </button>
+
+                  <button
+                      onClick={() => setActiveTab("films")}
+                      className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap ${
+                          activeTab === "films"
+                              ? "bg-red-600 text-white"
+                              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                      }`}
+                  >
+                    <i className="ri-movie-line text-xl" />
+                    Films
+                  </button>
+
+                  <button
+                      onClick={() => setActiveTab("ordre")}
+                      className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-lg font-semibold transition whitespace-nowrap ${
+                          activeTab === "ordre"
+                              ? "bg-purple-600 text-white"
+                              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                      }`}
+                  >
+                    <i className="ri-list-ordered text-xl" />
+                    Ordre
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

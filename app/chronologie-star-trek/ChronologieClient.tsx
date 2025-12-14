@@ -6,6 +6,7 @@ import { ApiChronoResponse, ApiChronoEra } from "./types";
 import { getColorStyle } from "./colorStyles";
 import { getEraIcon, getCtaIcon, getEventIcon } from "./IconMap";
 import ComeWithUs from "@/components/ComeWithUsSection";
+import Maillage from "@/components/maillage";
 
 export default function ChronologieClient({ data }: { data: ApiChronoResponse }) {
     const [activeEra, setActiveEra] = useState<string>(
@@ -184,7 +185,7 @@ export default function ChronologieClient({ data }: { data: ApiChronoResponse })
                         })}
                     </div>
                 </section>
-
+                <Maillage data={data.maillage}/>
        <ComeWithUs />
             </main>
         </div>

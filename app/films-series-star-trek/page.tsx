@@ -8,6 +8,7 @@ import { buildSeoMetadata } from "@/lib/seo"; // tu as déjà cette fonction
 import type { FilmsSeriesApiResponse } from "./types";
 import {getImageUrl} from "@/lib/image";
 import ComeWithUs from "@/components/ComeWithUsSection";
+import Maillage from "@/components/maillage";
 
 const WP_API_URL = process.env.NEXT_PUBLIC_WP_API;
 
@@ -53,7 +54,8 @@ export default async function FilmsSeriesPage() {
                     viewingOrders={data.viewingOrders}
                 />
             </main>
-            <ComeWithUs />
+            <Maillage data={data.maillage}/>
+            <ComeWithUs/>
 
         </div>
     );

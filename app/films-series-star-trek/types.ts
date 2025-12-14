@@ -52,6 +52,7 @@ export type FilmsSeriesViewingOrders = {
 };
 
 export type FilmsSeriesApiResponse = {
+    maillage: any;
     page: FilmsSeriesPageInfo;
     seo: FilmsSeriesSeo;
     hero: FilmsSeriesHero;

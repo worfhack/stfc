@@ -24,6 +24,7 @@ import {ApiCommunityResponse} from "@/app/types/community-page";
 import {buildSeoMetadata} from "@/lib/seo";
 import {getImageUrl} from "@/lib/image";
 import Image from "next/image";
+import Maillage from "@/components/maillage";
 export const dynamic = "force-dynamic";
 
 type IconName =
@@ -413,6 +414,7 @@ export default async function ActivitiesPage() {
                 </section>
             )}
 
+            <Maillage data={vm.maillage}/>
           <ComeWithUs />
           </main>
 
